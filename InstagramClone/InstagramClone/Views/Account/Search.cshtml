@@ -1,0 +1,23 @@
+﻿
+<div class="mt-5 mx-5">
+    <div class="row mt-5 justify-content-center">
+        <input id="searchKey" value=" " placeholder="Find Someone..." class="col-3" />
+        <button onclick="search()" class="col-1"> Search </button>
+    </div>
+</div>
+
+<div id="searchResult"> </div>
+<script>
+    function search() {
+        var key = document.getElementById("searchKey");
+        var link = "/Account/ListUsers/?keyword=" + key.value.replaceAll(" ", "");
+        console.log(link);
+        console.log(key);
+        if (link != "/Account/ListUsers/?keyword=") {
+            $("#searchResult").load(link);
+        }
+        else {
+            alert("Please Insert a search keyword");
+        }
+    }
+</script>

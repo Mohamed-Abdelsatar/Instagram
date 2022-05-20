@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6dab5b8a24a94bd89a2e615e7d910c8f" Name="Diagram1" >
+        <EntityTypeShape EntityType="masterModel.comment" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="masterModel.Friendship" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.image" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="masterModel.user_image_dilike" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="masterModel.user_image_like" Width="1.5" PointX="5.25" PointY="2.25" />
+        <EntityTypeShape EntityType="masterModel.User" Width="1.5" PointX="0.75" PointY="3.375" />
+        <AssociationConnector Association="masterModel.FK__comments__image___07220AB2" />
+        <AssociationConnector Association="masterModel.FK__comments__userid__062DE679" />
+        <AssociationConnector Association="masterModel.FK__images__userid__035179CE" />
+        <AssociationConnector Association="masterModel.FK__user_imag__image__0AF29B96" />
+        <AssociationConnector Association="masterModel.FK__user_imag__image__0EC32C7A" />
+        <AssociationConnector Association="masterModel.FK__user_imag__useri__0DCF0841" />
+        <AssociationConnector Association="masterModel.FK__user_imag__useri__09FE775D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

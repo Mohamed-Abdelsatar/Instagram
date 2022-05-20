@@ -1,0 +1,220 @@
+﻿@model IEnumerable<InstagramClone.Models.image>
+
+@{
+    //var v = Model.ToList();
+    var a = 0;
+    var m = 0;
+}
+<style>
+    .wrapper {
+        height: 800px;
+    }
+    .cmt p{
+        font-weight: bold;
+    }
+    .cmt p span{
+        font-weight: 300;
+    }
+</style>
+
+
+@foreach (var item in Model)
+{
+    <section class="main single-post-container mt-5">
+        <div class="wrapper">
+            <div class="left-col">
+                <!--POST-->
+
+                <div class="post">
+                    <div class="info">
+                        <div class="user">
+                            <div class="profile-pic">
+
+                                @if (@item.User.profileimage != null)
+                                {
+                                    <img src="@Url.Content(item.User.profileimage)" />
+
+                                }
+                                @if (@item.User.profileimage == null)
+                                {
+                                    <img src="~/Images/noprofile.jpg" />
+
+                                }
+                            </div>
+                            <p class="username">@Html.DisplayFor(modelItem => item.User.First_Name)</p>
+                        </div>
+                    </div>
+                    <img src="@Url.Content(item.imagepath)" class="post-image" />
+
+                    <div class="post-content">
+
+                        <div class="reaction-wrapper">
+
+                            @foreach (var c in item.user_image_like)
+                            {
+                                if (c.userid == item.userid)
+                                {
+                                    m = 1;
+                                    break;
+                                }
+                                else if (c.userid != item.userid)
+                                {
+                                    m = 0;
+                                }
+                            }
+
+                            @foreach (var x in item.user_image_dilike)
+                            {
+                                if (x.userid == item.userid)
+                                {
+                                    a = 1;
+                                    break;
+                                }
+                                else if (x.userid != item.userid)
+                                {
+                                    a = 0;
+                                }
+                            }
+
+                            @if (item.user_image_like.Count <= 10)
+                            {
+                                m = 0;
+                            }
+                            @if (item.user_image_dilike.Count <= 10)
+                            {
+                                a = 0;
+                            }
+
+                            @if ((m == 1 && a == 0) || (m == 1 && a == 1) || (m == 0 && a == 1))
+                            {
+                                using (Html.BeginForm("like", "Images", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="userid" value="@item.userid" />
+                                    <input type="hidden" name="image_id" value="@item.id" />
+
+                                    <button class="icon fas fa-thumbs-up" disabled></button>
+
+                                }
+                                using (Html.BeginForm("Dislike", "Images", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="userid" value="@item.userid" />
+                                    <input type="hidden" name="image_id" value="@item.id" />
+
+                                    <button class="icon fas fa-thumbs-down" disabled></button>
+                                }
+
+                            }
+                            else if (m == 0 && a == 0)
+                            {
+                                using (Html.BeginForm("like", "Images", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="userid" value="@item.userid" />
+                                    <input type="hidden" name="image_id" value="@item.id" />
+
+                                    <button class="icon fas fa-thumbs-up"></button>
+
+                                }
+                                using (Html.BeginForm("Dislike", "Images", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="userid" value="@item.userid" />
+                                    <input type="hidden" name="image_id" value="@item.id" />
+
+                                    <button class="icon fas fa-thumbs-down"></button>
+                                }
+
+                            }
+
+
+
+                        </div>
+
+                        <p class="likes">@item.user_image_like.Count likes  . @item.user_image_dilike.Count Dislikes</p>
+
+                        <p class="description">
+                            <span>@Html.DisplayFor(modelItem => item.User.First_Name)</span> this is a post by @Html.DisplayFor(modelItem => item.User.First_Name)
+                        </p>
+                        <p class="post-time">2022/5/15</p>
+                    </div>
+                    @foreach (var c in item.comments)
+                    {
+                        <div class="cmt">
+                            <p>@c.User.First_Name <span>@c.comment1</span> </p>
+                        </div>
+
+                    }
+                    @using (Html.BeginForm("PN", "Images", FormMethod.Post))
+                    {
+                        <div class="comment-wrapper">
+
+
+                            @*
+        @if (@item.User.profileimage != null)
+        {
+            <img src="@Url.Content(item.User.profileimage)" class="icon" />
+
+        }
+        @if (@item.User.profileimage == null)
+        {
+            <img src="~/Images/noprofile.jpg" class="icon" />
+
+        }*@
+                            <input type="text"
+                                   name="Co"
+                                   class="comment-box"
+                                   placeholder="Add a comment" />
+                            <input type="hidden" name="CID" value="@item.id" />
+                            <input type="hidden" name="UID" value="@item.userid" />
+                            <button class="comment-btn">Comment</button>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+            <div class="right-col">
+
+                <!--Profile-Card-->
+                @*
+        <div class="profile-card">
+            <div class="profile-pic">
+
+
+                @if (@item.User.profileimage != null)
+                {
+                    <img src="@Url.Content(item.User.profileimage)" />
+
+                }
+                @if (@item.User.profileimage == null)
+                {
+                    <img src="~/Images/noprofile.jpg" />
+
+                }
+            </div>
+            <div>
+                <p class="username"> <a href="Index.html" style="text-decoration: none;color: black;">@Html.DisplayFor(modelItem => item.User.First_Name)</a></p>
+            </div>
+            <button class="logout-btn">Logout</button>
+        </div>
+                *@
+                <!--Suggestion-Card-->
+
+                <p class="suggestion-text">Suggestions For you</p>
+
+                <div class="suggestion-card">
+                    <div class="suggestion-pic">
+                        <img src="~/Images/jeff.jpg" alt="" />
+                    </div>
+                    <div>
+                        <p class="username"> <a href="https://www.instagram.com/JeffBezos" style="text-decoration: none;color: black;">Jeff Bezos</a></p>
+                        <span class="fas fa-check-circle" style="color: cornflowerblue; display:table-cell;"></span>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<!-- script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>

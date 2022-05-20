@@ -1,0 +1,17 @@
+﻿@model InstagramClone.Models.imageVM
+
+@{
+    ViewBag.Title = "addimages";
+}
+
+<h2>addimages</h2>
+
+<form action="addimages" method="post" enctype="multipart/form-data">
+    <div class="row justify-content-center align-items-center">
+        <input class="col-2 fileInput" type="file" name="img" value="file" />
+        <div class="col-2 d-flex align-items-center">
+            <button class="w-100 lightBtn" type="submit">Add Photo</button>
+        </div>
+
+    </div>
+</form>

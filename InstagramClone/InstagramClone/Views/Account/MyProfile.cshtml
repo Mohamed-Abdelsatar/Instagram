@@ -1,0 +1,47 @@
+﻿@model InstagramClone.Models.User
+
+<main>
+    <header class="profile-header">
+        <div class="profile-container">
+            <div class="profile">
+                <div class="profile-image">
+                    @if (Session["profileimage"] != null)
+                    {
+                        <img src="@Url.Content(Session["profileimage"].ToString())" />
+
+                    }
+                    @if (Session["profileimage"] == null)
+                    {
+                        <img src="~/Images/noprofile.jpg" />
+
+                    }
+
+
+                </div>
+                <div class="profile-user-settings">
+                    <h1 class="profile-user-name">@Session["First_Name"] @Session["Last_Name"]</h1>
+                    <button class="profile-btn profile-edit-btn"> @Html.ActionLink("Edit", "Edit", new { id = Session["id"], @class = "edit" }) </button>
+                    <button class="profile-btn profile-settings-btn"
+                            aria-label="profile settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+                <div class="profile-stats">
+                    <ul>
+                        <li><span class="profile-stat-count">@{/*Model.images.Count*/}</span> </li>
+                        <li><a href="/Friends/ViewFriends" style="text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;Friends</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="profile-bio">
+                    <p>
+                        @Session["bio"]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    @Html.Action("addus", "Images", new { id = (int)Session["id"] });
+</main>
+<!--Script-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>

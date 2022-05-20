@@ -1,0 +1,108 @@
+﻿@model InstagramClone.Models.RegisterVM
+@{ 
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Sign Up</title>
+    <!-- Stylesheet -->
+    <link href="~/CSS_Style/StyleSheet1.css" rel="stylesheet" />
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/4e6b50c3ce.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="~/Images/icon.png" />
+
+</head>
+<body>
+    <section class="wrapper">
+        <div class="left">
+            <img src="~/Images/phones.png" alt="phone" />
+            <img class="screen" src="~/Images/screen.jpg" alt="phone-screen" />
+        </div>
+        <div class="right">
+            <div class="panel login">
+                <img id="logo" src="~/Images/instagram-logo.png" alt="logo">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div>
+                        @Html.TextBoxFor(a => a.First_Name, new { @PlaceHolder = "First Name", @class = "input-box", })
+                        @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "ErrorMessage" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(a => a.Last_Name, new { @PlaceHolder = "Last Name", @class = "input-box", })
+                        @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "ErrorMessage" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(a => a.phone, new { @PlaceHolder = "Phone", @class = "input-box", })
+                        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "ErrorMessage" })
+                        <p class="ErrorMessage">@ViewBag.PhoneMessage</p>
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(a => a.email, new { @PlaceHolder = "Email", @class = "input-box", })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "ErrorMessage" })
+                        <p class="ErrorMessage">@ViewBag.EmailMessage</p>
+                    </div>
+                    <div>
+                        @Html.PasswordFor(a => a.Passwords, new { @PlaceHolder = "Password", @class = "input-box", })
+                        @Html.ValidationMessageFor(model => model.Passwords, "", new { @class = "ErrorMessage" })
+                    </div>
+
+                    <input class="button"
+                           type="submit"
+                           name="login"
+                           value="Sign Up">
+
+                    <div class="divider">
+                        <div class="line"></div>
+                        <p>OR</p>
+                        <div class="line"></div>
+                    </div>
+                    <a class="fb" href="https://www.facebook.com/">Sign Up with Facebook</a>
+                }
+            </div>
+            <div class="panel signup">
+                <p>Have an account?</p>
+                @Html.ActionLink("Sign In", "Login", "Account")
+            </div>
+            <div class="apps">
+                <p>Get the app.</p>
+                <div class="app-stores">
+                    <img src="~/Images/app-store.png" alt="App Store">
+                    <img src="~/Images/play-store.png" alt="Play Store">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <ul>
+            <li><a href=#>About</a></li>
+            <li><a href=#>Blog</a></li>
+            <li><a href=#>Jobs</a></li>
+            <li><a href=#>Help</a></li>
+            <li><a href=#>API</a></li>
+            <li><a href=#>Privacy</a></li>
+            <li><a href=#>Terms</a></li>
+            <li><a href=#>Top Accounts</a></li>
+            <li><a href=#>Hashtags</a></li>
+            <li><a href=#>Locations</a></li>
+            <li><a href=#>Instagram Lite</a></li>
+            <li><a href=#>Beauty</a></li>
+            <li><a href=#>Dance</a></li>
+            <li><a href=#>Fitness</a></li>
+            <li><a href=#>Food & Drink</a></li>
+            <li><a href=#>Home & Garden</a></li>
+            <li><a href=#>Music</a></li>
+            <li><a href=#>Visual Arts</a></li>
+        </ul>
+        <ul>
+            <li>English</li>
+            <li>&copy; 2022 Instagram from Meta</li>
+        </ul>
+    </footer>
+</body>
+
+

@@ -1,0 +1,61 @@
+﻿@model InstagramClone.Models.User
+
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+
+
+@if (ViewBag.viewable)
+{
+    <header class="profile-header">
+        <div class="profile-container">
+            <div class="profile">
+                <div class="profile-image">
+                    @if (Model.profileimage != null)
+                    {
+                        <img src="@Url.Content(Model.profileimage.ToString())" />
+
+                    }
+                    @if (Model.profileimage == null)
+                    {
+                        <img src="~/Images/noprofile.jpg" />
+
+                    }
+
+
+                </div>
+                <div class="profile-user-settings">
+                    <h1 class="profile-user-name">@Model.First_Name @Model.Last_Name</h1>
+                    <button class="profile-btn profile-settings-btn"
+                            aria-label="profile settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+                <div class="profile-stats">
+                    <ul>
+                        <li><span class="profile-stat-count">@{/*Model.images.Count*/}</span></li>
+                        <li><a href="/Friends/ViewFriends" style="text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;Friends</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="profile-bio">
+                    <p>
+                        @Model.bio
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    @Html.Action("addus", "Images", new { id = Model.id });
+}
+else
+{
+    <p>You Cant View This Profile</p>
+    <script>
+        setInterval(redirect(), 15000);
+        function redirect() {
+            window.location.href = "/Account/MyProfile";
+        }
+    </script>
+}

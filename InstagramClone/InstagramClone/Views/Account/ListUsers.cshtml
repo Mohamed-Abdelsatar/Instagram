@@ -1,0 +1,46 @@
+﻿@model IEnumerable<InstagramClone.Models.User>
+
+<div class="mt-5 mx-5">
+    @if (ViewBag.error == null)
+    {
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+
+                <li class="list-group-item search-result-item">
+                    <a href="/Account/UserProfile/@item.id">
+                        @if (@item.profileimage != null)
+                        {
+                            <img src="@Url.Content(item.profileimage)" />
+
+                        }
+                        @if (@item.profileimage == null)
+                        {
+                            <img src="~/Images/noprofile.jpg" />
+
+                        }
+
+                    </a>
+
+                    <div>
+                        <p>@Html.DisplayFor(modelItem => item.First_Name) @Html.DisplayFor(modelItem => item.Last_Name)</p>
+                        <!--<span>bio</span>-->
+                    </div>
+                    <div class="search-result-item-btn">
+                        @Html.ActionLink("Follow", "sendFriendRequest", "Friends" ,new { User_Id = item.id },null)
+                    </div>
+                </li>
+            }
+        </ul>
+
+    }
+    else
+    {
+        <p>@ViewBag.error</p>
+    }
+
+
+
+
+
+</div>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="comments" EntityType="masterModel.comment" />
+    <EntitySet Name="Friendships" EntityType="masterModel.Friendship" />
+    <EntitySet Name="images" EntityType="masterModel.image" />
+    <EntitySet Name="user_image_dilike" EntityType="masterModel.user_image_dilike" />
+    <EntitySet Name="user_image_like" EntityType="masterModel.user_image_like" />
+    <EntitySet Name="Users" EntityType="masterModel.User" />
+    <AssociationSet Name="FK__comments__image___07220AB2" Association="masterModel.FK__comments__image___07220AB2">
+      <End Role="image" EntitySet="images" />
+      <End Role="comment" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments__userid__062DE679" Association="masterModel.FK__comments__userid__062DE679">
+      <End Role="User" EntitySet="Users" />
+      <End Role="comment" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__images__userid__035179CE" Association="masterModel.FK__images__userid__035179CE">
+      <End Role="User" EntitySet="Users" />
+      <End Role="image" EntitySet="images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_imag__image__0AF29B96" Association="masterModel.FK__user_imag__image__0AF29B96">
+      <End Role="image" EntitySet="images" />
+      <End Role="user_image_like" EntitySet="user_image_like" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_imag__image__0EC32C7A" Association="masterModel.FK__user_imag__image__0EC32C7A">
+      <End Role="image" EntitySet="images" />
+      <End Role="user_image_dilike" EntitySet="user_image_dilike" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_imag__useri__0DCF0841" Association="masterModel.FK__user_imag__useri__0DCF0841">
+      <End Role="User" EntitySet="Users" />
+      <End Role="user_image_dilike" EntitySet="user_image_dilike" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_imag__useri__09FE775D" Association="masterModel.FK__user_imag__useri__09FE775D">
+      <End Role="User" EntitySet="Users" />
+      <End Role="user_image_like" EntitySet="user_image_like" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="userid" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="image_id" Type="Int32" />
+    <NavigationProperty Name="image" Relationship="masterModel.FK__comments__image___07220AB2" FromRole="comment" ToRole="image" />
+    <NavigationProperty Name="User" Relationship="masterModel.FK__comments__userid__062DE679" FromRole="comment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Friendship">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Friends" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Friend_Requests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="image">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="userid" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imagepath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="comments" Relationship="masterModel.FK__comments__image___07220AB2" FromRole="image" ToRole="comment" />
+    <NavigationProperty Name="User" Relationship="masterModel.FK__images__userid__035179CE" FromRole="image" ToRole="User" />
+    <NavigationProperty Name="user_image_like" Relationship="masterModel.FK__user_imag__image__0AF29B96" FromRole="image" ToRole="user_image_like" />
+    <NavigationProperty Name="user_image_dilike" Relationship="masterModel.FK__user_imag__image__0EC32C7A" FromRole="image" ToRole="user_image_dilike" />
+  </EntityType>
+  <EntityType Name="user_image_dilike">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="image_id" Type="Int32" />
+    <NavigationProperty Name="image" Relationship="masterModel.FK__user_imag__image__0EC32C7A" FromRole="user_image_dilike" ToRole="image" />
+    <NavigationProperty Name="User" Relationship="masterModel.FK__user_imag__useri__0DCF0841" FromRole="user_image_dilike" ToRole="User" />
+  </EntityType>
+  <EntityType Name="user_image_like">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="image_id" Type="Int32" />
+    <NavigationProperty Name="image" Relationship="masterModel.FK__user_imag__image__0AF29B96" FromRole="user_image_like" ToRole="image" />
+    <NavigationProperty Name="User" Relationship="masterModel.FK__user_imag__useri__09FE775D" FromRole="user_image_like" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="Int32" />
+    <Property Name="Passwords" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="profileimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="comments" Relationship="masterModel.FK__comments__userid__062DE679" FromRole="User" ToRole="comment" />
+    <NavigationProperty Name="images" Relationship="masterModel.FK__images__userid__035179CE" FromRole="User" ToRole="image" />
+    <NavigationProperty Name="user_image_dilike" Relationship="masterModel.FK__user_imag__useri__0DCF0841" FromRole="User" ToRole="user_image_dilike" />
+    <NavigationProperty Name="user_image_like" Relationship="masterModel.FK__user_imag__useri__09FE775D" FromRole="User" ToRole="user_image_like" />
+  </EntityType>
+  <Association Name="FK__comments__image___07220AB2">
+    <End Type="masterModel.image" Role="image" Multiplicity="0..1" />
+    <End Type="masterModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="image">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="image_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments__userid__062DE679">
+    <End Type="masterModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="masterModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__images__userid__035179CE">
+    <End Type="masterModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="masterModel.image" Role="image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="image">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_imag__image__0AF29B96">
+    <End Type="masterModel.image" Role="image" Multiplicity="0..1" />
+    <End Type="masterModel.user_image_like" Role="user_image_like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="image">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_image_like">
+        <PropertyRef Name="image_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_imag__image__0EC32C7A">
+    <End Type="masterModel.image" Role="image" Multiplicity="0..1" />
+    <End Type="masterModel.user_image_dilike" Role="user_image_dilike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="image">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_image_dilike">
+        <PropertyRef Name="image_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_imag__useri__0DCF0841">
+    <End Type="masterModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="masterModel.user_image_dilike" Role="user_image_dilike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_image_dilike">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_imag__useri__09FE775D">
+    <End Type="masterModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="masterModel.user_image_like" Role="user_image_like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_image_like">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
