@@ -1,4 +1,4 @@
-# Instagram
+# Instagram Clone
 <h2># Version Seems Like Instagram built Using Our Knowledge in Web Application Architecture </h2>
 <h3> Description :</h3><hr>
 <h4>• Using MVC Approach in Building This Web Application </h4>
